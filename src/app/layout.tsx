@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import ChatSidebar from "@/components/ChatSidebar";
 
 const playfairDisplayHeading = Playfair_Display({subsets:['latin'],variable:'--font-heading'});
 
@@ -21,16 +22,24 @@ export default function RootLayout({
   return (
     <html
       lang="en" suppressHydrationWarning
-      className={cn("antialiased", "font-sans", notoSans.variable, playfairDisplayHeading.variable)}
+      className={cn(
+        "antialiased", 
+        "font-sans", 
+        notoSans.variable, 
+        playfairDisplayHeading.variable
+      )}
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className="min-h-full flex flex-col">{children}</body>
-      </ThemeProvider>
+        <body className="min-h-full flex flex-col">
+          <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          >
+              <ChatSidebar />
+              {children}
+          </ThemeProvider>
+        </body>
     </html>
   );
 }
